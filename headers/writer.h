@@ -7,7 +7,9 @@ namespace Geometry
     class Writer
     {
     public:
+        Writer()=default;
+        ~Writer()=default;
         // Function to write geometry data to an STL file
-        void write(std::string &filePath,std::vector<GeomVector> &vectors);
+        void write(const std::string &filePath, const std::vector<GeomVector> &vectors);
     };
 }

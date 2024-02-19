@@ -29,5 +29,3 @@ double LinearAlgebra::Matrix::element(int row, int col) const
 {
     return matrix[row][col];
 }
- 
-LinearAlgebra::Matrix::~Matrix() {}

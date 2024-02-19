@@ -4,16 +4,18 @@
 Geometry :: GeomVector::GeomVector() : Point3D() {}
 Geometry :: GeomVector::GeomVector(double x, double y, double z) : Point3D(x,y,z) {}
  
-Geometry:: GeomVector :: GeomVector::~GeomVector() {}
- 
- bool Geometry:: GeomVector :: operator == (const GeomVector &other) const
+// Overloaded equality operator for comparing two vectors
+bool Geometry:: GeomVector :: operator == (const GeomVector &other) const
  {
         return ( ( other.x() == this->x() ) && ( other.y() == this->y() ) && ( other.z() == this->z() ) );
  }
+ 
+// Calculate the dot product of two vectors
 double Geometry::GeomVector::dotProduct(const GeomVector &other) const {
     return (this->x() * other.x()) + (this->y() * other.y()) + (this->z() * other.z());
 }
 
+// Calculate the cross product of two vectors and return new vector
 Geometry::GeomVector Geometry::GeomVector::crossProduct(const GeomVector& other) const {
     double newX = (this->y() * other.z()) - (this->z() * other.y());
     double newY = (this->z() * other.x()) - (this->x() * other.z());
@@ -21,57 +23,72 @@ Geometry::GeomVector Geometry::GeomVector::crossProduct(const GeomVector& other)
     return GeomVector(newX, newY, newZ);
 }
 
+//Calculate the magnitude (length) of a vector.
 double Geometry::GeomVector::magnitude() const {
     return sqrt(this->x()*this->x() + this->y()*this->y() + this->z()*this->z());
 }
 
+//Normalize a vector to unit length
 Geometry::GeomVector Geometry::GeomVector::normalize() const {
     double mag = magnitude();
-    return GeomVector(this->x()/mag, this->y()/mag, this->z()/mag);
+    if( mag != 0)
+        return GeomVector(this->x()/mag, this->y()/mag, this->z()/mag);
+    else
+        return GeomVector(0.0,0.0, 0.0);
 }
 
+//Overload + operator to add two vectors and return new vector
 Geometry::GeomVector Geometry::GeomVector:: operator + (const GeomVector &other) const
 {
     return GeomVector(this->x() + other.x(), this->y() + other.y(), this->z() + other.z());
 }
 
+//Overload - operator to subtract two vectors and return new vector
 Geometry::GeomVector Geometry::GeomVector:: operator - (const GeomVector &other) const
 {
     return GeomVector(this->x() - other.x(), this->y() - other.y(), this->z() - other.z());
 }
 
+//Overload * operator to multiply two vectors and return new vector
 Geometry::GeomVector Geometry::GeomVector:: operator * (const GeomVector &other) const
 {
     return GeomVector(this->x() * other.x(), this->y() * other.y(), this->z() * other.z());
 }
 
+//Overload / operator to divide two vectors and return new vector
 Geometry::GeomVector Geometry::GeomVector:: operator / (const GeomVector &other) const
 {
     return GeomVector(this->x() / other.x(), this->y() / other.y(), this->z() / other.z());
 }
 
+//Set the length of a vector to a specified value
 Geometry::GeomVector Geometry::GeomVector:: setVectorLength(double newLength) const
 {
+    //normalize the vector and then change it's magnitude
     return this->normalize().multiplyScalar( newLength );
 }
 
+//Add a scalar value to each component of a vector
 Geometry::GeomVector Geometry::GeomVector::addScalar(double scalar) const {
     return GeomVector(this->x() + scalar, this->y() + scalar, this->z() + scalar);
 }
 
+//Subtract a scalar value from each component of a vector
 Geometry::GeomVector Geometry::GeomVector::subtractScalar(double scalar) const {
     return GeomVector(this->x() - scalar, this->y() - scalar, this->z() - scalar);
 }
 
-
+//Multiply each component of a vector by a scalar value
 Geometry::GeomVector Geometry::GeomVector::multiplyScalar(double scalar) const {
     return GeomVector(this->x() * scalar, this->y() * scalar, this->z() * scalar);
 }
 
+//Divide each component of a vector by a scalar value
 Geometry::GeomVector Geometry::GeomVector::divideScalar(double scalar) const {
     return GeomVector(this->x() / scalar, this->y() / scalar, this->z() / scalar);
 }
 
+//Calculate the Euclidean distance between two vectors
 double Geometry::GeomVector::distanceBetweenVectors(const GeomVector& other) const {
     double dx = this->mX - other.x();
     double dy = this->mY - other.y();
@@ -79,6 +96,7 @@ double Geometry::GeomVector::distanceBetweenVectors(const GeomVector& other) con
     return sqrt(dx*dx + dy*dy + dz*dz);
 }
 
+//Calculate the distance between a vector and a plane
 double Geometry::GeomVector:: distanceBetweenVectorAndPlane(const Geometry::Plane &plane) const
 { 
     double dX = x() - plane.pointOnPlane().x();
@@ -89,6 +107,7 @@ double Geometry::GeomVector:: distanceBetweenVectorAndPlane(const Geometry::Plan
     return distance;
 }
 
+//Calculate the angle between two vectors
 double Geometry::GeomVector :: angleBetweenVectors(const GeomVector &other) const
 {
     double dotProductResult = this->dotProduct(other);
@@ -99,6 +118,7 @@ double Geometry::GeomVector :: angleBetweenVectors(const GeomVector &other) cons
     return angleradians * (180.0 / M_PI);
 }
 
+//Calculate the angle between a vector and a plane
 double Geometry::GeomVector::angleBetweenVectorAndPlane(const Geometry::Plane &plane) const
 {
     // dot product (vector and plane's normal)
@@ -112,6 +132,7 @@ double Geometry::GeomVector::angleBetweenVectorAndPlane(const Geometry::Plane &p
     return angleRadians * (180.0 / M_PI);
 }
 
+//Calculate the direction cosines of a vector
 void Geometry::GeomVector :: directionCosines() const
 {
     double magnitudeResult = magnitude();
@@ -130,6 +151,7 @@ void Geometry::GeomVector :: directionCosines() const
     std::cout<<"alpha :"<<alpha<<"beta :"<<beta<<"gamma :"<<gamma<<std::endl;
 }
 
+// Multiply a vector by a matrix
 Geometry::GeomVector Geometry::GeomVector::multiplyMatrix(const LinearAlgebra::Matrix &matrix) const
 {
     double resultX = x() * matrix.element(0, 0) + y() * matrix.element(1, 0) + z() * matrix.element(2, 0);
@@ -138,6 +160,7 @@ Geometry::GeomVector Geometry::GeomVector::multiplyMatrix(const LinearAlgebra::M
     return Geometry::GeomVector(resultX, resultY, resultZ);
 }
 
+//Calculate the projection of one vector onto another vector
 Geometry::GeomVector Geometry::GeomVector::projectionOnVector(const GeomVector &otherVector) const
 {
     double dotProductResult = dotProduct(otherVector);
@@ -152,9 +175,50 @@ Geometry::GeomVector Geometry::GeomVector::projectionOnVector(const GeomVector &
     return otherVector.multiplyScalar(scalarValue);
 }
 
+//Calculate the projection of a vector onto a plane.
 Geometry::GeomVector Geometry::GeomVector::projectVectorOnPlane(const GeomVector &vector, const GeomVector &planeNormal) const
 {
     GeomVector projection = vector.projectionOnVector(planeNormal);
     GeomVector result = vector - projection;
     return result;
+}
+
+// calculates angle between vector and axis
+double Geometry::GeomVector::angleBetweenVectorAndAxis(int axis) const
+{
+    double dotProductResult = 0.0;
+    double vectorMagnitude = magnitude();
+    double axisMagnitude = 1.0;
+ 
+    // x-axis
+    if (axis == 0)
+    {
+        if (vectorMagnitude == 0.0)
+        {
+            return 0.0;
+        }
+        dotProductResult = x();
+    }
+    // y-axis
+    else if (axis == 1)
+    {
+        if (vectorMagnitude == 0.0)
+        {
+            return 0.0;
+        }
+        dotProductResult = y();
+    }
+    // z-axis
+    else if (axis == 2)
+    {
+        if (vectorMagnitude == 0.0)
+        {
+            return 0.0;
+        }
+        dotProductResult = z();
+    }
+ 
+    double angleRadians = std::acos(dotProductResult / (vectorMagnitude * axisMagnitude));
+    // converting radians to degrees
+    return angleRadians * (180.0 / M_PI);
 }

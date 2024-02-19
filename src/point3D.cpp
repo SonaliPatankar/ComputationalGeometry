@@ -4,8 +4,6 @@ Geometry ::Point3D::Point3D() : mX(0), mY(0), mZ(0) {}
 
 Geometry ::Point3D::Point3D(double x, double y, double z) : mX(x), mY(y), mZ(z) {}
 
-Geometry ::Point3D::~Point3D() {}
-
 double Geometry ::Point3D::x() const
 {
     return mX;

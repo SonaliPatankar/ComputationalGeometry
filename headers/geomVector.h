@@ -11,7 +11,7 @@ namespace Geometry
     public:
     GeomVector();
         GeomVector(double x, double y, double z);
-        ~GeomVector();
+        ~GeomVector()=default;
         bool operator == (const GeomVector &other) const;
         double magnitude() const;
         GeomVector normalize() const;
@@ -33,13 +33,12 @@ namespace Geometry
         double distanceBetweenVectorAndPlane(const Geometry::Plane &plane) const;
         double angleBetweenVectors(const GeomVector &other) const;
         double angleBetweenVectorAndPlane(const Geometry::Plane &plane) const;
-        void angleBetweenVectorAndAxis() const;
+        double angleBetweenVectorAndAxis(int axis) const;
         
         GeomVector multiplyMatrix(const LinearAlgebra::Matrix &matrix) const;
         GeomVector projectionOnVector(const GeomVector &otherVector) const;
         GeomVector projectVectorOnPlane(const GeomVector &vector,const GeomVector &planeNormal) const;
         void directionCosines() const;
-        // Vector3D subtractScalar(double scalar) const;
-        // Vector3D scalarDivision(double scalar) const;
+        
     };
 }

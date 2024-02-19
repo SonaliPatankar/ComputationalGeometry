@@ -14,5 +14,3 @@ Geometry::Point3D Geometry::Plane::pointOnPlane() const
 {
     return mPointOnPlane;
 }
- 
-Geometry::Plane::~Plane() {}

@@ -7,7 +7,7 @@ namespace Geometry
     public:
         Point3D();
         Point3D(double x, double y, double z);
-        ~Point3D();
+        ~Point3D()=default;
         double x() const;
         double y() const;
         double z() const;
