@@ -1,11 +1,11 @@
 #include "../headers/plane.h"
-#include "../headers/vector3D.h"
+#include "../headers/geomVector.h"
  
-Geometry::Plane::Plane() : mNormal(Vector3D(0, 0, 0)), mPointOnPlane(Point3D(0, 0, 0)) {}
-Geometry::Plane::Plane(const Geometry::Vector3D &normal, const Geometry::Point3D &pointOnPlane)
+Geometry::Plane::Plane() : mNormal(GeomVector(0, 0, 0)), mPointOnPlane(Point3D(0, 0, 0)) {}
+Geometry::Plane::Plane(const Geometry::GeomVector &normal, const Geometry::Point3D &pointOnPlane)
     : mNormal(normal), mPointOnPlane(pointOnPlane) {}
  
-Geometry::Vector3D Geometry::Plane::normal() const
+Geometry::GeomVector Geometry::Plane::normal() const
 {
     return mNormal;
 }

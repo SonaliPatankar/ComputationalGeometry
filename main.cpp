@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "./headers/vector3D.h"
+#include "./headers/geomVector.h"
 #include "./headers/writer.h"
 #include "./headers/matrix.h"
 #include "./headers/plane.h"
@@ -44,8 +44,8 @@ int main()
         std::cout << "enter value for x, y and z" << std::endl;
         std::cin >> x1 >> y1 >> z1;
 
-        Geometry::Vector3D a(x, y, z);
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector a(x, y, z);
+        Geometry::GeomVector b(x1, y1, z1);
         if(a==b)
         {
             std::cout<<"Two vectors are equal."<<std::endl;
@@ -59,7 +59,7 @@ int main()
     {
         std::cout << "enter value for x, y and z" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
         std::cout<<"Magnitude of two vector is "<<a.magnitude()<<std::endl;
     }
     break;
@@ -68,11 +68,11 @@ int main()
     {
         std::cout << "enter value for x, y and z" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector a(x, y, z);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
 //cahcek if magnitude is one
-        Geometry::Vector3D result = a.normalize();
+        Geometry::GeomVector result = a.normalize();
         vectors.push_back(result);
         Geometry::Writer writer;
         std::string filepath = "output/vector.txt";
@@ -85,13 +85,13 @@ int main()
         int newLength;
         std::cout << "enter value for x, y and z" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector a(x, y, z);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
 
         std::cout<<"Enter new length "<<std::endl;
         std::cin>>newLength;
-        Geometry::Vector3D result = a.setVectorLength(newLength);
+        Geometry::GeomVector result = a.setVectorLength(newLength);
 
         vectors.push_back(result);
         Geometry::Writer writer;
@@ -104,14 +104,14 @@ int main()
         int scalarValue;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter integer value" << std::endl;
         std::cin >> scalarValue;
 
-        Geometry::Vector3D result = a.addScalar(scalarValue);
-        std::vector<Geometry::Vector3D> vectors;
-        vectors.push_back(a);
+        Geometry::GeomVector result = a.addScalar(scalarValue);
+        std::vector<Geometry::GeomVector> vectors;
+        // vectors.push_back(a);
         vectors.push_back(result);
         Geometry::Writer writer;
         std::string filepath = "output/vector.txt";
@@ -124,13 +124,13 @@ int main()
         int scalarValue;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter integer value" << std::endl;
         std::cin >> scalarValue;
 
-        Geometry::Vector3D result = a.subtractScalar(scalarValue);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a.subtractScalar(scalarValue);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(result);
         Geometry::Writer writer;
@@ -143,13 +143,13 @@ int main()
         int scalarValue;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter integer value" << std::endl;
         std::cin >> scalarValue;
 
-        Geometry::Vector3D result = a.multiplyScalar(scalarValue);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a.multiplyScalar(scalarValue);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(result);
         Geometry::Writer writer;
@@ -163,13 +163,13 @@ int main()
         int scalarValue;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter integer value" << std::endl;
         std::cin >> scalarValue;
 
-        Geometry::Vector3D result = a.divideScalar(scalarValue);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a.divideScalar(scalarValue);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(result);
         Geometry::Writer writer;
@@ -182,14 +182,14 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector b(x1, y1, z1);
 
-        Geometry::Vector3D result = a+b;
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a+b;
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(b);
         vectors.push_back(result);
@@ -203,14 +203,14 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector b(x1, y1, z1);
 
         double result = a.dotProduct(b);
-        std::vector<Geometry::Vector3D> vectors;
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(b);
         std::cout<<"dot product is "<<result<<std::endl;
@@ -224,14 +224,14 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector b(x1, y1, z1);
 
-        Geometry::Vector3D result = a.crossProduct(b);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a.crossProduct(b);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(b);
         vectors.push_back(result);
@@ -245,9 +245,9 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
         a.directionCosines();
-        std::vector<Geometry::Vector3D> vectors;
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);       
     }
     break;
@@ -256,15 +256,15 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         double s, b, c, d, e, f, g, h, i;
         std::cout << "Enter the elements of the 3 x 3 matrix: ";
         std::cin >> s >> b >> c >> d >> e >> f >> g >> h >> i;
         LinearAlgebra::Matrix matrix(s, b, c, d, e, f, g, h, i);
 
-        Geometry::Vector3D result = a.multiplyMatrix(matrix);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a.multiplyMatrix(matrix);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(result);
         Geometry::Writer writer;
@@ -277,11 +277,11 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x,y and z value for vector2" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector b(x1, y1, z1);
 
         double result = a.distanceBetweenVectors(b);
         std::cout<<"Distance between two vectors is "<<result<<std::endl;
@@ -296,11 +296,11 @@ int main()
         double z2;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x,y and z value for normal" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D normal(x1, y1, z1);
+        Geometry::GeomVector normal(x1, y1, z1);
 
         std::cout << "enter 3 coordinates for point" << std::endl;
         std::cin >> x2>>y2>>z2;
@@ -317,11 +317,11 @@ int main()
       
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x,y and z value for normal" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector b(x1, y1, z1);
 
         double result = a.angleBetweenVectors(b);
         std::cout<<"Angle between two vectors is "<<result<<std::endl;
@@ -335,11 +335,11 @@ int main()
         double z2;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x,y and z value for normal" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D normal(x1, y1, z1);
+        Geometry::GeomVector normal(x1, y1, z1);
 
         std::cout << "enter 3 coordinates for point" << std::endl;
         std::cin >> x2>>y2>>z2;
@@ -355,14 +355,14 @@ int main()
     {
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x,y and z value for normal" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D b(x1, y1, z1);
+        Geometry::GeomVector b(x1, y1, z1);
 
-        Geometry::Vector3D result = a.projectionOnVector(b);
-        std::vector<Geometry::Vector3D> vectors;
+        Geometry::GeomVector result = a.projectionOnVector(b);
+        std::vector<Geometry::GeomVector> vectors;
         vectors.push_back(a);
         vectors.push_back(b);
         vectors.push_back(result);
@@ -379,19 +379,20 @@ int main()
         double z2;
         std::cout << "enter x, y and z value for vector1" << std::endl;
         std::cin >> x >> y >> z;
-        Geometry::Vector3D a(x, y, z);
+        Geometry::GeomVector a(x, y, z);
 
         std::cout << "enter x,y and z value for normal" << std::endl;
         std::cin >> x1 >> y1 >> z1;
-        Geometry::Vector3D normal(x1, y1, z1);
+        Geometry::GeomVector normal(x1, y1, z1);
 
-        std::cout << "enter 3 coordinates for point" << std::endl;
-        std::cin >> x2>>y2>>z2;
-        Geometry::Point3D point(x2, y2, z2);
-
-        Geometry::Plane plane(normal,point);
-        double result = a.angleBetweenVectorAndPlane(plane);
-        std::cout<<"angle between vector and plane is "<<result<<std::endl;
+        Geometry::GeomVector result = a.projectVectorOnPlane(a,normal);
+        std::vector<Geometry::GeomVector> vectors;
+        vectors.push_back(a);
+        vectors.push_back(normal);
+        vectors.push_back(result);
+        Geometry::Writer writer;
+        std::string filepath = "output/vector.txt";
+        writer.write(filepath, vectors); 
     }
     break;
     

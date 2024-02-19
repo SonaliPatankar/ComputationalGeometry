@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../headers/writer.h"
 
-void Geometry ::Writer ::write(std::string &filePath,std::vector<Vector3D> &vectors)
+void Geometry ::Writer ::write(std::string &filePath,std::vector<GeomVector> &vectors)
 {
     std::ofstream outFile(filePath);
 
@@ -13,7 +13,7 @@ void Geometry ::Writer ::write(std::string &filePath,std::vector<Vector3D> &vect
     }
 
     // Write triangles to the STL file
-    for (const Vector3D &vector : vectors)
+    for (const GeomVector &vector : vectors)
     {
         // Write each vertex of the triangle to the STL file
         outFile<<0.0<<" "<<0.0<<" "<<0.0<<std::endl;
